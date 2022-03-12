@@ -35,9 +35,14 @@ function App() {
 		author: ''
 	})
 
-	useEffect(() => {
-		getQuote().then(setQuote)
-	}, [])
+  useEffect(() => {
+    const id = setInterval(() => {
+      getQuote().then(setQuote);
+    }, 5000);
+    return () => {
+			clearInterval(id);
+		}
+  }, []);
 
 	return (
 		<div className='App' style={{ backgroundImage: `url(${quote.imageUrl})` }}>
