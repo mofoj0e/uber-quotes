@@ -30,8 +30,7 @@ const getQuote: () => Promise<QuoteResponse> = async () => {
 	return {
 		quote: response.data.content,
 		author: response.data.author,
-		// imageUrl: response2.data.messageyy,
-		imageUrl: "https://source.dog.ceo/api/breeds/image/random"
+		imageUrl: response2.data.message,
 	}
 }
 
@@ -41,6 +40,10 @@ function App() {
 		imageUrl: '',
 		author: ''
 	})
+
+	useEffect(() => {
+		getQuote().then(setQuote);
+	}, []);
 
 	useEffect(() => {
 		const id = setInterval(() => {
