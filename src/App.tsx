@@ -19,12 +19,19 @@ interface QuoteResponse {
 	author: string
 }
 
+interface Background {
+	message: string;
+}
+
 const getQuote: () => Promise<QuoteResponse> = async () => {
 	const response = await axios.get<any, AxiosResponse<Quote>>('https://api.quotable.io/random')
+	const response2 = await axios.get<any, AxiosResponse<Background>>("https://dog.ceo/api/breeds/image/random");
+
 	return {
 		quote: response.data.content,
 		author: response.data.author,
-		imageUrl: "https://source.unsplash.com/random/1920x1080"
+		// imageUrl: response2.data.messageyy,
+		imageUrl: "https://source.dog.ceo/api/breeds/image/random"
 	}
 }
 
@@ -35,14 +42,14 @@ function App() {
 		author: ''
 	})
 
-  useEffect(() => {
-    const id = setInterval(() => {
-      getQuote().then(setQuote);
-    }, 5000);
-    return () => {
+	useEffect(() => {
+		const id = setInterval(() => {
+			getQuote().then(setQuote);
+		}, 5000);
+		return () => {
 			clearInterval(id);
 		}
-  }, []);
+	}, []);
 
 	return (
 		<div className='App' style={{ backgroundImage: `url(${quote.imageUrl})` }}>
