@@ -19,8 +19,10 @@
 
 .Quote > h1 {
   word-wrap: break-word;
+	font-size: 4vw;
 }
 
 .Author {
   align-self: flex-end;
+	font-size: 2vw;
 }
